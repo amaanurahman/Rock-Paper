@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f0f8ff; /* light blue background */
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  text-align: center;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full screen height */
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 80px;
+  font-weight: 700;
+  color: #ff6347; /* Tomato red for emphasis */
+  margin-top: 40px;
+  letter-spacing: 5px;
+}
+
+h2 {
+  font-size: 50px;
+  font-weight: 600;
+  color: #32cd32; /* Lime green for fun, friendly vibe */
+  margin: 10px 0;
+}
+
+h3 {
+  font-size: 28px;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+.main, .notMain {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.computer, .me {
+  background-color: #ffffff; /* white background */
+  border: 2px solid #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  color: #333;
+  font-size: 18px;
+  transition: background-color 0.2s, transform 0.1s;
+  width: 180px; /* Slightly larger buttons */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.computer:hover, .me:hover {
+  background-color: #f7f7f7; /* light gray on hover */
+  transform: scale(1.05);
+}
+
+.computer img, .me img {
+  width: 100px; /* Slightly larger icons */
+  margin-bottom: 10px;
+}
+
+#result {
+  font-size: 50px; /* Increased the font size */
+  font-weight: bold;
+  color: #ff4500; /* OrangeRed for the result text */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.result-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 600px;
+  margin-top: 40px;
+  text-align: center; /* Center the result container */
+}
+
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

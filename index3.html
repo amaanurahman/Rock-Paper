@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stone Paper Scissor</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Let's Play</h1>
+    <h2>Stone-Paper-Scissor</h2>
+    <h3>Click a Random Box</h3>
+
+    <div class="main">
+      <button class="computer" id="scissor">
+        <img class="icon" src="scissors.png" alt="Scissor" />
+        Scissor
+      </button>
+
+      <button class="computer" id="paper">
+        <img class="icon" src="hand-paper.png" alt="Paper" />
+        Paper
+      </button>
+
+      <button class="computer" id="stone">
+        <img class="icon" src="stone.png" alt="Stone" />
+        Stone
+      </button>
+    </div>
+
+    <div class="notMain">
+      <button class="me" id="scissor-user">
+        <img class="icon" src="scissors.png" alt="Scissor" />
+        Scissor
+      </button>
+
+      <button class="me" id="paper-user">
+        <img class="icon" src="hand-paper.png" alt="Paper" />
+        Paper
+      </button>
+
+      <button class="me" id="stone-user">
+        <img class="icon" src="stone.png" alt="Stone" />
+        Stone
+      </button>
+    </div>
+
+    <!-- Score and result will appear here -->
+    <div id="score-container">
+      <p><b>Your Score:</b> <span id="user-score">0</span></p>
+      <p><b>Computer's Score:</b> <span id="computer-score">0</span></p>
+    </div>
+    
+    <div id="result-container"></div>
+
+    <script>
+      const computerOptions = ["scissor", "paper", "stone"];
+      const computerButtons = document.querySelectorAll(".computer");
+      const resultContainer = document.getElementById("result-container");
+      const userScoreElem = document.getElementById("user-score");
+      const computerScoreElem = document.getElementById("computer-score");
+
+      let userScore = 0;
+      let computerScore = 0;
+
+      function getComputerChoice() {
+        const randomIndex = Math.floor(Math.random() * computerOptions.length);
+        return computerOptions[randomIndex];
+      }
+
+      function handleUserChoice(userChoice) {
+        const computerChoice = getComputerChoice();
+
+        // Reset all computer buttons' background
+        computerButtons.forEach(btn => {
+          btn.style.backgroundColor = "white";
+        });
+
+        // Highlight computer's chosen button
+        const compBtn = document.getElementById(computerChoice);
+        if (compBtn) {
+          compBtn.style.backgroundColor = "lightblue";
+        }
+
+        // Decide winner
+        let resultText = "";
+        if (userChoice === computerChoice) {
+          resultText = "It's a Draw!";
+        } else if (
+          (userChoice === "stone" && computerChoice === "scissor") ||
+          (userChoice === "scissor" && computerChoice === "paper") ||
+          (userChoice === "paper" && computerChoice === "stone")
+        ) {
+          userScore++;
+          resultText = "You Win!";
+        } else {
+          computerScore++;
+          resultText = "You Lose!";
+        }
+
+        // Update scores
+        userScoreElem.textContent = userScore;
+        computerScoreElem.textContent = computerScore;
+
+        // Display the result below the user's selection
+        resultContainer.innerHTML = `You chose <b>${userChoice}</b>. Computer chose <b>${computerChoice}</b>. <br><br><span id="result">${resultText}</span>`;
+
+        // Check if anyone won the game
+        if (userScore === 5) {
+          alert("Congratulations, You Win the Game!");
+          resetGame();
+        } else if (computerScore === 5) {
+          alert("Computer Wins the Game. Better Luck Next Time!");
+          resetGame();
+        }
+      }
+
+      function resetGame() {
+        // Reset the scores
+        userScore = 0;
+        computerScore = 0;
+        userScoreElem.textContent = userScore;
+        computerScoreElem.textContent = computerScore;
+
+        // Reset result container
+        resultContainer.innerHTML = "";
+      }
+
+      // Set up click listeners on user buttons
+      document.querySelectorAll(".me").forEach(button => {
+        button.addEventListener("click", () => {
+          const userChoice = button.id.replace("-user", "");
+          handleUserChoice(userChoice);
+        });
+      });
+    </script>
+  </body>
+</html>
